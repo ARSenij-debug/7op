@@ -1,0 +1,91 @@
+{% extends "common_template.html" %}
+
+{% block content %}
+
+    <div class="content-date float-right">{{ post.author }}, {{post.date}}</div>
+    <div class="content-type">{{ post.category.name_sing }}!</div>
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            {% for photo in photos_for_spin %}
+                <li data-target="#carouselExampleIndicators" data-slide-to="{{ photo.index }}" {% ifequal photo.index  0 %} class="active" {% endifequal %}></li>
+            {% endfor %}
+        </ol>
+        <div class="carousel-inner">
+            {% for photo in photos_for_spin %}
+                <div class="carousel-item{% ifequal photo.index 0 %} active{% endifequal %}" style="height=450px;">
+                    <img src="/{{ photo.photo }}" class="d-block w-100" height="450px">
+                </div>
+            {% endfor %}
+
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <div class="content-title"><h1>{{ post.title }}</h1></div>
+    <div class="content-data">{{ post.data|linebreaks }}</div>
+    <hr>
+    {% if files %}
+        <h6>Прикрепленные файлы:</h6>
+        {% for file in files %}
+            <a href="/{{file.file}}"> {{file.name}}</a>
+        {% endfor %}
+        <hr>
+    {% endif %}
+
+    <div class="comments contaner">
+
+        {% if user.is_authenticated %}
+            <div class="user-name">Вы вошли как {{ user.get_username }}</div>
+            <div class="create-comment">
+                <form action="" method="post">
+
+                    {% csrf_token %}
+                    <div class="form-group">
+
+                        {{ form }}
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Оставить комментарий</button>
+                </form>
+            </div>
+        {% else %}
+            Для того, чтобы оставить комментарий, войдите в систему
+        {% endif %}
+
+        <hr>
+
+        <h2>Комментарии пользователей</h2>
+
+        {% for comment in comments %}
+
+        <div class="comment-item">
+
+                <div class="comment-date float-right">{{ comment.date }}</div>
+                <div class="comment-author">{{ comment.author }}</div>
+                <div class="comment-data">{{ comment.data|linebreaks }}</div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if comments.has_previous %}
+                <a href="?page={{ comments.previous_page_number }}">Предыдущая</a>
+            {% endif %}
+
+            <span class="current">
+                Страница {{ comments.number }} из {{ comments.paginator.num_pages }}.
+            </span>
+
+            {% if comments.has_next %}
+                <a href="?page={{ comments.next_page_number }}">Следующая</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

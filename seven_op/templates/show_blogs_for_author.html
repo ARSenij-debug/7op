@@ -1,0 +1,39 @@
+{% extends "common_template.html" %}
+
+{% block content %}
+
+    <div class="author-info" style="min-height: 60px;">
+
+        <div class="float-right">
+
+            <h2>{{ author.name }}</h2>
+            <p>{{ author.info }}</p>
+        </div>
+        <img src="/{{ author.photo.photo }}" class="img-thumbnail author-photo" alt="" style="height: 200px;">
+    </div>
+    <hr>
+    {% for blog in blogs %}
+
+        <div class="authors-post">
+
+            <p class="post-date float-right">{{ blog.date }}</p>
+            <a href="{{ blog.get_url_for_show }}"><h4>{{ blog.title }}</h4></a>
+            <p>{{ blog.description }}</p>
+        </div>
+    {% endfor %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if blogs.has_previous %}
+                <a href="?page={{ blogs.previous_page_number }}">Предыдущая</a>
+            {% endif %}
+
+            <span class="current">
+                Страница {{ blogs.number }} из {{ blogs.paginator.num_pages }}.
+            </span>
+
+            {% if blogs.has_next %}
+                <a href="?page={{ blogs.next_page_number }}">Следующая</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

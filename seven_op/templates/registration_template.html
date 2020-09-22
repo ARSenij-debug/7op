@@ -1,0 +1,14 @@
+{% extends "common_template.html" %}
+
+{% block content %}
+    <p style="color: red;">{{error_massage}}</p>
+    <form action="" method="post">
+
+        {% csrf_token %}
+        <div class="form-group">
+
+        {{ form }}
+        </div>
+         <button type="submit" class="btn btn-secondary">Зарегистрироваться</button>
+    </form>
+{% endblock %}

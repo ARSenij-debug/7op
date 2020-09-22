@@ -1,0 +1,37 @@
+{% extends "common_template.html" %}
+
+{% block content %}
+
+    <div class="row content-row">
+    {% for post in posts %}
+
+        <div class="post col-lg-4 col-md-6">
+
+            <div class="post-type">{{ post.category }}</div>
+            <img src="/{{ post.preview }}" alt="" width="100%">
+            <a href="{{ post.get_url_for_show }}"><div class="post-title">{{ post.title }}</div></a>
+			<hr>
+			<div class="post-data">{{ post.description }}</div>
+			<div class="post-date text-right">{{ post.date }}</div>
+        </div>
+    {% endfor %}
+    </div>
+
+    <div class="space"></div>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if posts.has_previous %}
+                <a href="?page={{ posts.previous_page_number }}">Предыдущая</a>
+            {% endif %}
+
+            <span class="current">
+                Страница {{ posts.number }} из {{ posts.paginator.num_pages }}.
+            </span>
+
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}">Следующая</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

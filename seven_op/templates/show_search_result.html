@@ -1,0 +1,39 @@
+{% extends "common_template.html" %}
+
+{% block content %}
+
+    <div class="row content-row">
+        <div class="container"><h2 style="padding-top: 10px;">По вашему запросу нашлось {{ count }} {% if count10 == 1 %}
+            ответ {% else %} {% if count10 < 5 %} ответа {% else %} ответов {%  endif %} {% endif %}</h2></div>
+        {% for post in search_list %}
+
+            <div class="post col-lg-4 col-md-6">
+
+                <div class="post-type">{{ post.category }}</div>
+                <img src="/{{ post.preview }}" alt="" width="100%">
+                <a href="{{ post.get_url_for_show }}"><div class="post-title">{{ post.title }}</div></a>
+                <hr>
+                <div class="post-data">{{ post.description }}</div>
+                <div class="post-date text-right">{{ post.date }}</div>
+            </div>
+    {% endfor %}
+    </div>
+
+     <div class="space"></div>
+
+     <div class="pagination">
+        <span class="step-links">
+            {% if search_list.has_previous %}
+                <a href="?page={{ search_list.previous_page_number }}">Предыдущая</a>
+            {% endif %}
+
+            <span class="current">
+                Страница {{ search_list.number }} из {{ search_list.paginator.num_pages }}.
+            </span>
+
+            {% if search_list.has_next %}
+                <a href="?page={{ search_list.next_page_number }}">Следующая</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

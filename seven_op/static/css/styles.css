@@ -1,0 +1,132 @@
+body {
+	background-color: #f5f5f0;
+}
+
+a, a:hover {
+	text-decoration: none;
+	color: black;
+}
+
+.post hr {
+	margin: 0;
+}
+
+.content {
+	background-color: white;
+}
+
+.logo-bar, .footer{
+	height: 175px;
+	background-color: #404040;
+}
+
+.logo-bar h1 {
+	font-size: 75px;
+	padding-left: 30px;
+	padding-top: 30px;
+}
+
+.post-type {
+	font-size: 20px;
+}
+
+.post-title {
+	font-size: 25px;
+}
+
+.post-date {
+	font-size: 15px;
+	color: #6c757d;
+}
+
+.space {
+	margin-bottom: 20px;
+}
+
+.login-menu {
+	margin-top: 35px;
+	font-size: 17px;
+}
+
+.login-menu a, a:hover {
+	color: #ffc107;
+}
+
+.footer h1 {
+	padding-top: 30px;
+	font-size: 75px;
+}
+
+.Border {
+	padding: 5px;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.header-bar {
+	padding: 0;
+}
+
+.post {
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+.content-type, .content-date{
+	padding: 15px;
+	font-size: 25px;
+}
+
+.content-date {
+	color: #6c757d;
+}
+
+.content-title {
+	margin-top: 10px;
+	font-size: 40px;
+}
+
+.content-data {
+	margin: 10px;
+}
+
+.comment-author, .comment-date {
+	padding: 15px;
+	font-size: 25px;
+}
+
+.comment-author {
+	color: #17a2b8;
+}
+
+.comment-date {
+	color: #6c757d;
+}
+
+.comment-data {
+	padding: 15px;
+}
+
+.comment-item {
+	border: 1px solid black;
+	border-radius: 5px;
+	margin-bottom: 15px;
+}
+
+.card {
+	margin-top: 10px;
+	font-size: 80%;
+}
+
+.author-photo {
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+.author-info {
+	margin-top: 20px;
+}
+
+.pagination {
+    text
+}
