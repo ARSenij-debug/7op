@@ -26,7 +26,7 @@ SECRET_KEY = 'a!xmcqk8sq!xp03-g$kh-gy3^_rk*=l8+m-n^0km0530@lea@k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['www.семь-мнений.рф', '127.0.0.1']
+ALLOWED_HOSTS = ['www.семь-мнений.рф', '127.0.0.1', '.herokuapp.com']
 
 
 # Application definition
@@ -156,3 +156,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # The URL to use when referring to static files (where they will be served from)
 STATIC_URL = '/static/'
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
