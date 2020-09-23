@@ -149,6 +149,11 @@ STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-'''# Configure Django App for Heroku.
+#какая-то фигня с хабр
+WHITENOISE_USE_FINDERS = True
+STATIC_ROOT = None
+
+
+# Configure Django App for Heroku.
 import django_heroku
-django_heroku.settings(locals())'''
+django_heroku.settings(locals())
