@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -27,7 +26,7 @@ SECRET_KEY = 'a!xmcqk8sq!xp03-g$kh-gy3^_rk*=l8+m-n^0km0530@lea@k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['www.семь-мнений.рф', '127.0.0.1', 'https://shielded-sea-91865.herokuapp.com']
+ALLOWED_HOSTS = ['www.семь-мнений.рф', '127.0.0.1']
 
 
 # Application definition
@@ -142,6 +141,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # The URL to use when referring to static files (where they will be served from)
 STATIC_URL = '/static/'
-
-# Activate Django-Heroku.
-django_heroku.settings(locals())
