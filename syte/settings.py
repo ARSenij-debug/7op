@@ -23,7 +23,7 @@ SECRET_KEY = 'a!xmcqk8sq!xp03-g$kh-gy3^_rk*=l8+m-n^0km0530@lea@k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['www.семь-мнений.рф', '127.0.0.1']
+ALLOWED_HOSTS = ['www.семь-мнений.рф', '127.0.0.1', '.herokuapp.com']
 
 
 # Application definition
