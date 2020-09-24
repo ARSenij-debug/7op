@@ -31,7 +31,7 @@ class UploadedFile(models.Model):
     """
     хранит загруженный файл
     """
-    file = models.FileField("файл", upload_to="uploads/files/%Y/%m/%d")
+    file = models.FileField("файл", upload_to="seven_op/static/uploads/files/%Y/%m/%d")
     name = models.CharField("имя файла", max_length=200)
 
     def __str__(self):
@@ -49,7 +49,7 @@ class UploadedPhoto(models.Model):
     """
     хранит загруженное фото
     """
-    photo = models.ImageField("фото", upload_to="uploads/img/%Y/%m/%d")
+    photo = models.ImageField("фото", upload_to="seven_op/static/uploads/img/%Y/%m/%d")
     index = models.IntegerField("номер фото в карусели", null=True, default=1,
                                 help_text="если загружаете фото для карусели, то пронумеруйте их с 0")
     name = models.CharField("название фото", max_length=200)
@@ -122,13 +122,13 @@ class Post(models.Model):
     author = models.CharField("имя автора", max_length=200)
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True)
     data = models.TextField("текст публикации")
-    preview = models.ImageField("фото на заголовок", upload_to="uploads/previews/%Y/%m/%d", null=True, default=None,
+    preview = models.ImageField("фото на заголовок", upload_to="seven_op/static/uploads/previews/%Y/%m/%d", null=True, default=None,
                                 blank=True)
-    photos_for_spin = models.ManyToManyField('UploadedPhoto', verbose_name='фото на "карусель"', null=True,
+    photos_for_spin = models.ManyToManyField('UploadedPhoto', verbose_name='фото на "карусель"',
                                              default=None, blank=True)
-    attached_files = models.ManyToManyField('UploadedFile', verbose_name="прикрепленные файлы", null=True,
+    attached_files = models.ManyToManyField('UploadedFile', verbose_name="прикрепленные файлы",
                                             default=None, blank=True)
-    comments = models.ManyToManyField('Comment', verbose_name="комментарии к публикации", null=True, default=None,
+    comments = models.ManyToManyField('Comment', verbose_name="комментарии к публикации", default=None,
                                       blank=True)
     date = models.DateTimeField(auto_now=True)
 
@@ -159,12 +159,12 @@ class Blog(models.Model):
     description = models.CharField("описание", max_length=1000, null=True, blank=True)
     author = models.ForeignKey('BlogAuthor', on_delete=models.SET_NULL, null=True)
     data = models.TextField("текст блога")
-    preview = models.ImageField("фото на заголовок", upload_to="uploads/previews/%Y/%m/%d", null=True, default=None)
-    photos_for_spin = models.ManyToManyField('UploadedPhoto', verbose_name='Фото на "карусель"', null=True,
+    preview = models.ImageField("фото на заголовок", upload_to="seven_op/static/uploads/previews/%Y/%m/%d", null=True, default=None)
+    photos_for_spin = models.ManyToManyField('UploadedPhoto', verbose_name='Фото на "карусель"',
                                              default=None, blank=True)
-    attached_files = models.ManyToManyField('UploadedFile', verbose_name="прикрепленные файлы", null=True,
+    attached_files = models.ManyToManyField('UploadedFile', verbose_name="прикрепленные файлы",
                                             default=None, blank=True)
-    comments = models.ManyToManyField('Comment', verbose_name="Комментарии к блогу", null=True, default=None, blank=True)
+    comments = models.ManyToManyField('Comment', verbose_name="Комментарии к блогу", default=None, blank=True)
 
     date = models.DateTimeField(auto_now=True)
 
