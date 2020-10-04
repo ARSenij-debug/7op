@@ -7,11 +7,11 @@
 
         <div class="post col-lg-4 col-md-6">
 
-            <div class="post-type">{{ post.category }}</div>
+            <div class="post-type badge badge-warning">{{ post.category }}</div>
             <img src="/{{ post.preview }}" alt="" width="100%">
-            <a href="{{ post.get_url_for_show }}"><div class="post-title">{{ post.title }}</div></a>
+            <a href="{{ post.get_url_for_show }}"><div class="post-title" style="line-height: 120%;"><strong>{{ post.title }}</strong></div></a>
 			<hr>
-			<div class="post-data">{{ post.description }}</div>
+			<div class="post-data" style="font-size: 120%">{{ post.description }}</div>
 			<div class="post-date text-right">{{ post.date }}</div>
         </div>
     {% endfor %}

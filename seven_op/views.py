@@ -186,6 +186,7 @@ def show_post(request, pk):
 
     return render(request, 'show_post_template.html',
                   context={'post': needed_post,
+                           'paragraphs': needed_post.paragraphs.order_by('paragraph_nb').all(),
                            'categories': categories,
                            'active': active,
                            'recent_blogs': recent_blogs,
@@ -243,6 +244,7 @@ def show_blog(request, pk):
     return render(request,
                   'show_blog_template.html',
                   context={'blog': needed_blog,
+                           'paragraphs': needed_blog.paragraphs.order_by('paragraph_nb').all(),
                            'categories': categories,
                            'active': active,
                            'recent_blogs': recent_blogs,

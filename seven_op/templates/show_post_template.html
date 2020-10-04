@@ -3,18 +3,18 @@
 {% block content %}
 
     <div class="content-date float-right">{{ post.author }}, {{post.date}}</div>
-    <div class="content-type">{{ post.category.name_sing }}!</div>
+    <div class="content-type">{{ post.category.name_sing }}</div>
 
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height: 20% !important;">
         <ol class="carousel-indicators">
             {% for photo in photos_for_spin %}
-                <li data-target="#carouselExampleIndicators" data-slide-to="{{ photo.index }}" {% ifequal photo.index  0 %} class="active" {% endifequal %}></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="{{ photo.index }}" {% ifequal photo.index 0 %} class="active" {% endifequal %}></li>
             {% endfor %}
         </ol>
-        <div class="carousel-inner">
+        <div class="carousel-inner d-block" style="height: 100%;">
             {% for photo in photos_for_spin %}
-                <div class="carousel-item{% ifequal photo.index 0 %} active{% endifequal %}" style="height=450px;">
-                    <img src="/{{ photo.photo }}" class="d-block w-100" height="450px">
+                <div class="carousel-item{% ifequal photo.index 0 %} active{% endifequal %} text-center" style="height: 100%">
+                    <img src="/{{ photo.photo }}" height="100%">
                 </div>
             {% endfor %}
 
@@ -29,7 +29,36 @@
         </a>
     </div>
     <div class="content-title"><h1>{{ post.title }}</h1></div>
-    <div class="content-data">{{ post.data|linebreaks }}</div>
+    <div class="content-data">
+
+        {% for paragraph in paragraphs %}
+
+            <div class="paragraph">
+
+                {% if paragraph.paragraph_title %}
+                    <hr>
+                    <div class="paragraph-title text-center">
+                        <h3>{{ paragraph.paragraph_title }}</h3>
+                    </div>
+                    <hr>
+                {% endif %}
+
+                {% if paragraph.paragraph_img %}
+                    <div class="text-center">
+                        <img src="/{{ paragraph.paragraph_img }}" class="paragraph-img" alt="...">
+                    </div>
+                {% endif %}
+
+                <div class="paragraph-text">
+                    {% if paragraph.is_strong %}
+                        <p><strong>{{ paragraph.paragraph_text|linebreaks }}</strong></p>
+                    {% else %}
+                        <p>{{ paragraph.paragraph_text|linebreaks }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
     <hr>
     {% if files %}
         <h6>Прикрепленные файлы:</h6>

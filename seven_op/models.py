@@ -4,6 +4,34 @@ from django.urls import reverse
 # Create your models here.
 
 
+class Paragraph(models.Model):
+    """
+    хранит:
+        название параграфа
+        фото к параграфу
+        текст параграфа
+        (жирный ли текст)
+        номер параграфа
+    """
+    paragraph_title = models.CharField("заголовок параграфа", max_length=200, blank=True)
+    paragraph_img = models.ImageField("фото к параграфу", upload_to="seven_op/static/uploads/files/%Y/%m/%d",
+                                      blank=True)
+    paragraph_text = models.TextField("текст параграфа", blank=True)
+    is_strong = models.BooleanField("жирный текст")
+    paragraph_nb = models.IntegerField("номер параграфа", default=0, blank=True)
+    date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        """
+        возвращает заголовок и время
+        """
+        return str(self.paragraph_title) + " ||| " + str(self.date)
+
+    class Meta:
+        ordering = ["-date"]
+        verbose_name_plural = "Параграфы"
+
+
 class Category(models.Model):
     """
     Хранит название категории
@@ -120,9 +148,10 @@ class Post(models.Model):
     title = models.CharField("заголовок", max_length=200)
     description = models.CharField("описание", max_length=1000, blank=True, null=True, help_text="необязательное поле")
     author = models.CharField("имя автора", max_length=200)
-    category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True)
-    data = models.TextField("текст публикации")
-    preview = models.ImageField("фото на заголовок", upload_to="seven_op/static/uploads/previews/%Y/%m/%d", null=True, default=None,
+    category = models.ForeignKey('Category', verbose_name="Категория", on_delete=models.SET_NULL, null=True)
+    paragraphs = models.ManyToManyField('Paragraph', verbose_name="Параграфы")
+    preview = models.ImageField("фото на заголовок", upload_to="seven_op/static/uploads/previews/%Y/%m/%d", null=True,
+                                default=None,
                                 blank=True)
     photos_for_spin = models.ManyToManyField('UploadedPhoto', verbose_name='фото на "карусель"',
                                              default=None, blank=True)
@@ -158,8 +187,9 @@ class Blog(models.Model):
     title = models.CharField("заголовок", max_length=200)
     description = models.CharField("описание", max_length=1000, null=True, blank=True)
     author = models.ForeignKey('BlogAuthor', on_delete=models.SET_NULL, null=True)
-    data = models.TextField("текст блога")
-    preview = models.ImageField("фото на заголовок", upload_to="seven_op/static/uploads/previews/%Y/%m/%d", null=True, default=None)
+    paragraphs = models.ManyToManyField('Paragraph', verbose_name="Параграфы")
+    preview = models.ImageField("фото на заголовок", upload_to="seven_op/static/uploads/previews/%Y/%m/%d", null=True,
+                                default=None)
     photos_for_spin = models.ManyToManyField('UploadedPhoto', verbose_name='Фото на "карусель"',
                                              default=None, blank=True)
     attached_files = models.ManyToManyField('UploadedFile', verbose_name="прикрепленные файлы",

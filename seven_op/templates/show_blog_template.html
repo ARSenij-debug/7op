@@ -3,7 +3,7 @@
 {% block content %}
 
     <div class="content-date float-right">{{ blog.author }}, {{ blog.date}}</div>
-    <div class="content-type"> Блог! </div>
+    <div class="content-type"> Блог </div>
 
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -29,7 +29,36 @@
         </a>
     </div>
     <div class="content-title"><h1>{{ blog.title }}</h1></div>
-    <div class="content-data">{{ blog.data|linebreaks }}</div>
+    <div class="content-data">
+
+        {% for paragraph in paragraphs %}
+
+            <div class="paragraph">
+
+                {% if paragraph.paragraph_title %}
+                    <hr>
+                    <div class="paragraph-title text-center">
+                        <h3>{{ paragraph.paragraph_title }}</h3>
+                    </div>
+                    <hr>
+                {% endif %}
+
+                {% if paragraph.paragraph_img %}
+                    <div class="text-center">
+                        <img src="/{{ paragraph.paragraph_img }}" class="paragraph-img" alt="...">
+                    </div>
+                {% endif %}
+
+                <div class="paragraph-text">
+                    {% if paragraph.is_strong %}
+                        <p><strong>{{ paragraph.paragraph_text|linebreaks }}</strong></p>
+                    {% else %}
+                        <p>{{ paragraph.paragraph_text|linebreaks }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
     <hr>
     {% if files %}
         <h6>Прикрепленные файлы:</h6>
